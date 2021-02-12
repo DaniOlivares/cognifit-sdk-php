@@ -4,11 +4,11 @@ namespace CognifitSdk\Lib;
 
 class Request {
 	
-	private string $clientId;
-	private string $clientSecret;
-	private string $sandbox;
+	protected   string $clientId;
+    private     string $clientSecret;
+	private     string $sandbox;
 
-	public function __construct(string $clientId, string $clientSecret, $sandbox = false){
+	public function __construct(string $clientId, string $clientSecret, $sandbox = false, ){
 		$this->clientId 	= $clientId;
 		$this->clientSecret = $clientSecret;
 		$this->sandbox 		= $sandbox;
@@ -24,11 +24,7 @@ class Request {
 			"User-Agent: Cognifit SDK"
 		];
 
-		if($this->sandbox){
-			$domain		= 'https://preapi.cognifit.com';
-		}else{
-			$domain = 'https://api.cognifit.com';
-		}
+		$domain = $this->getDomain();
 		
 		$bodyParams['client_id'] 		= $this->clientId;
 		$bodyParams['client_secret'] 	= $this->clientSecret;
@@ -69,5 +65,23 @@ class Request {
 		
 		
 	}
-	
+
+    protected function getDomain(){
+        if($this->sandbox){
+            $domain		= 'https://preapi.cognifit.com';
+        }else{
+            $domain = 'https://api.cognifit.com';
+        }
+        return $domain;
+    }
+
+    protected function getDomainFrontend(){
+        if($this->sandbox){
+            $domain		= 'https://preprod.cognifit.com';
+        }else{
+            $domain = 'https://www.cognifit.com';
+        }
+        return $domain;
+    }
+
 }
