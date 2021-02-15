@@ -8,7 +8,7 @@ class Request {
     private     string $clientSecret;
 	private     string $sandbox;
 
-	public function __construct(string $clientId, string $clientSecret, $sandbox = false, ){
+	public function __construct(string $clientId, string $clientSecret, $sandbox = false){
 		$this->clientId 	= $clientId;
 		$this->clientSecret = $clientSecret;
 		$this->sandbox 		= $sandbox;
@@ -25,10 +25,7 @@ class Request {
 		];
 
 		$domain = $this->getDomain();
-		
-		$bodyParams['client_id'] 		= $this->clientId;
-		$bodyParams['client_secret'] 	= $this->clientSecret;
-		
+
 		curl_setopt_array($curl, [
 		  CURLOPT_URL 				=> $domain . $resourcePath,
 		  CURLOPT_RETURNTRANSFER 	=> true,
@@ -37,9 +34,14 @@ class Request {
 		  CURLOPT_TIMEOUT 			=> 30,
 		  CURLOPT_HTTP_VERSION 		=> CURL_HTTP_VERSION_1_1,
 		  CURLOPT_CUSTOMREQUEST 	=> $method,
-		  CURLOPT_POSTFIELDS 		=> json_encode($bodyParams),
 		  CURLOPT_HTTPHEADER 		=> $headers
 		]);
+
+        if($method !== 'GET'){
+            $bodyParams['client_id'] 		= $this->clientId;
+            $bodyParams['client_secret'] 	= $this->clientSecret;
+            curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode($bodyParams));
+        }
 		
 		$response 	= curl_exec($curl);
 		$err 		= curl_error($curl);

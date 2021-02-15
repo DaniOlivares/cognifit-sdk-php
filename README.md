@@ -135,25 +135,152 @@ $url = $cognifitStartSession->getUrl($userAccessToken, $callbackUrl);
 ### User manager
 
 #### Update user account
+
+```PHP
+use CognifitSdk\Api\UserAccount;
+use CognifitSdk\Lib\UserData;
+
+$userToken              = 'USER_TOKEN';
+$userName               = 'Joe';
+$userEmail              = 'joe@example.com';
+$userBirth              = '1981-07-15';
+$locale                 = 'en';
+$userPassword           = 'RANDOM_PASSWORD_OR_USER_KNOWN_PASSWORD';
+$cognifitApiUserAccount = new UserAccount(
+    env('COGNIFIT_CLIENT_ID'),
+    env('COGNIFIT_CLIENT_SECRET'),
+    env('COGNIFIT_API_SANDBOX')
+);
+$response = $cognifitApiUserAccount->update($userToken, new UserData([
+    'user_name'     => $userName,
+    'user_email'    => $userEmail,
+    'user_birthday' => $userBirth,
+    'user_locale'   => $locale,
+    'user_password' => $userPassword 
+]));
+
+if(!$response->hasError()){
+    // Success
+}
+```
+
 #### User activation
+
+If a user was previously deactivated, this method will set it to activated. Users need to be activated to log in CogniFit. Activate a user is not allocating any license or program to that user.
+
+```PHP
+use CognifitSdk\Api\UserAccount;
+
+$userToken              = 'USER_TOKEN';
+$cognifitApiUserAccount = new UserAccount(
+    env('COGNIFIT_CLIENT_ID'),
+    env('COGNIFIT_CLIENT_SECRET'),
+    env('COGNIFIT_API_SANDBOX')
+);
+$response = $cognifitApiUserAccount->activate($userToken);
+
+if(!$response->hasError()){
+    // Success
+}
+```
+
 #### User deactivation
+
+Allows to deactivate users and free their licenses. As long as users are deactivated, their cognitive information can not be reached nor can they log in CogniFit.
+
+```PHP
+use CognifitSdk\Api\UserAccount;
+
+$userToken              = 'USER_TOKEN';
+$cognifitApiUserAccount = new UserAccount(
+    env('COGNIFIT_CLIENT_ID'),
+    env('COGNIFIT_CLIENT_SECRET'),
+    env('COGNIFIT_API_SANDBOX')
+);
+$response = $cognifitApiUserAccount->deactivate($userToken);
+
+if(!$response->hasError()){
+    // Success
+}
+```
+
 #### User grant training subscription
+
+Allows to activate monthly recurring subscriptions for users. User will have access to all training programs and all games. By default, the personalised training will be set as training program.
+
+```PHP
+use CognifitSdk\Api\UserAccount;
+
+$userToken              = 'USER_TOKEN';
+$cognifitApiUserAccount = new UserAccount(
+    env('COGNIFIT_CLIENT_ID'),
+    env('COGNIFIT_CLIENT_SECRET'),
+    env('COGNIFIT_API_SANDBOX')
+);
+$response = $cognifitApiUserAccount->grantTrainingLicense($userToken);
+
+if(!$response->hasError()){
+    // Success
+}
+```
+
 #### User cancel training subscription
+
+Allows to deactivate monthly recurring subscriptions for users. User will have access until the end of his subscription period. After that subscription will not be renewed and user will not have anymore access to trainings and games.
+
+```PHP
+use CognifitSdk\Api\UserAccount;
+
+$userToken              = 'USER_TOKEN';
+$cognifitApiUserAccount = new UserAccount(
+    env('COGNIFIT_CLIENT_ID'),
+    env('COGNIFIT_CLIENT_SECRET'),
+    env('COGNIFIT_API_SANDBOX')
+);
+$response = $cognifitApiUserAccount->revokeTrainingLicense($userToken);
+
+if(!$response->hasError()){
+    // Success
+}
+```
+
 #### User account deletion
 
+Allows to delete user accounts. User data would be removed. User would not be able to access CogniFit anymore with this account. The partner would not be able to access user data. Partners are only able to delete accounts created by them.
+
+```PHP
+use CognifitSdk\Api\UserAccount;
+
+$userToken              = 'USER_TOKEN';
+$cognifitApiUserAccount = new UserAccount(
+    env('COGNIFIT_CLIENT_ID'),
+    env('COGNIFIT_CLIENT_SECRET'),
+    env('COGNIFIT_API_SANDBOX')
+);
+$response = $cognifitApiUserAccount->delete($userToken);
+
+if(!$response->hasError()){
+    // Success
+}
+```
 
 ### Cognitive assessments
 
 #### Assessments list
 
+List of allowed assessment keys to use when setting a training program.
 
 ### Brain training Programs
 
 #### Training list
 
+List of allowed training keys to use when setting a training program.
+
 
 ### Brain Games
 #### Brain Game list
+
+List of allowed games keys to use when starting a unique game session.
 
 
 ### Set training program
