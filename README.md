@@ -270,18 +270,46 @@ if(!$response->hasError()){
 
 List of allowed assessment keys to use when setting a training program.
 
+```PHP
+use CognifitSdk\Api\Product;
+
+$product        = new Product(env('COGNIFIT_CLIENT_ID'), true);
+$assessments    = $product->getAssessments();
+foreach ($assessments as $assessmentKey => $assessment){
+    echo $assessment->getKey();
+}   
+```
+
 ### Brain training Programs
 
 #### Training list
 
 List of allowed training keys to use when setting a training program.
 
+```PHP
+use CognifitSdk\Api\Product;
+
+$product           = new Product(env('COGNIFIT_CLIENT_ID'), true);
+$trainingPrograms  = $product->getTraining();
+foreach ($trainingPrograms as $trainingProgramKey => $trainingProgram){
+    echo $trainingProgram->getKey();
+}   
+```
 
 ### Brain Games
 #### Brain Game list
 
 List of allowed games keys to use when starting a unique game session.
 
+```PHP
+use CognifitSdk\Api\Product;
+
+$product    = new Product(env('COGNIFIT_CLIENT_ID'), true);
+$games      = $product->getGames();
+foreach ($games as $gameKey => $game){
+    echo $game->getKey();
+}   
+```
 
 ### Set training program
 #### Login & Launch

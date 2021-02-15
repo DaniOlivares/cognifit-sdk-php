@@ -13,6 +13,10 @@ class Product extends Request {
     const RESOURCE_PATH_TRAINING    = '/programs/trainings';
     const RESOURCE_PATH_GAME        = '/programs/tasks';
 
+    public function __construct(string $clientId, $sandbox = false){
+        parent::__construct($clientId, '', $sandbox);
+    }
+
     public function getAssessments(){
         $resource = self::RESOURCE_PATH_ASSESSMENT . '?client_id=' . $this->clientId;
         $response = $this->doRequest($resource, array(), 'GET');

@@ -4,11 +4,13 @@ use PHPUnit\Framework\TestCase;
 
 use CognifitSdk\Api\Product;
 
+include_once dirname(__FILE__) . '/../.environment-test.php';
+
 class ProductsTest extends TestCase {
 
     public function testGetAssessments()
     {
-        $product     = new Product('341972f281d4a507255b15e9cc050eb7', 'FAKE_SECRET_ID', true);
+        $product     = new Product(getenv('TEST_CLIENT_ID'), true);
         $assessments = $product->getAssessments();
         $this->assertArrayHasKey('GENERAL_ASSESSMENT', $assessments);
         foreach ($assessments as $assessmentKey => $assessment){
@@ -18,7 +20,7 @@ class ProductsTest extends TestCase {
 
     public function testGetTraning()
     {
-        $product   = new Product('341972f281d4a507255b15e9cc050eb7', 'FAKE_SECRET_ID', true);
+        $product   = new Product(getenv('TEST_CLIENT_ID'), true);
         $trainings = $product->getTraining();
         $this->assertArrayHasKey('NORMAL', $trainings);
         foreach ($trainings as $trainingKey => $training){
@@ -28,7 +30,7 @@ class ProductsTest extends TestCase {
 
     public function testGetGames()
     {
-        $product    = new Product('341972f281d4a507255b15e9cc050eb7', 'FAKE_SECRET_ID', true);
+        $product    = new Product(getenv('TEST_CLIENT_ID'), true);
         $games      = $product->getGames();
         $this->assertArrayHasKey('MAHJONG', $games);
         foreach ($games as $gameKey => $game){
