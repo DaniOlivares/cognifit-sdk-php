@@ -314,12 +314,38 @@ foreach ($games as $gameKey => $game){
 }   
 ```
 
-### Set training program
-#### Login & Launch
+### Login & Launch
 
+After obtaining a user access token, it must be used before it expires:
+    1. by getting a url with next method and redirect there the user
+    2. by using CogniFit Launcher SDK for JavaScript to embed CogniFit in your site
 
-### Set tasks program
-#### Login & Launch
+#### Training program
+
+```PHP
+use CognifitSdk\Api\UserStartSession;
+
+$userStartSession   = new UserStartSession(getenv('TEST_CLIENT_ID'), '', true, getenv('TEST_CLIENT_HASH'));
+$urlToStartSession  = $userStartSession->getUrlStartCognifitForTraining($this->userToken, $this->callbackUrl, 'DRIVING');   
+```
+
+#### Assessment program
+
+```PHP
+use CognifitSdk\Api\UserStartSession;
+
+$userStartSession   = new UserStartSession(getenv('TEST_CLIENT_ID'), '', true, getenv('TEST_CLIENT_HASH'));
+$urlToStartSession  = $userStartSession->getUrlStartCognifitForAssessment('USER_TOKEN', '', 'DRIVING_ASSESSMENT');   
+```
+
+#### Task program
+
+```PHP
+use CognifitSdk\Api\UserStartSession;
+
+$userStartSession   = new UserStartSession(getenv('TEST_CLIENT_ID'), '', true, getenv('TEST_CLIENT_HASH'));
+$urlToStartSession  = $userStartSession->getUrlStartCognifitForGame('USER_TOKEN', '', 'MAHJONG');   
+```
 
 
 ### Activity and evolution report
