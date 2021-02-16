@@ -38,4 +38,25 @@ class ProductsTest extends TestCase {
         }
     }
 
+    public function testGetAssessmentsError()
+    {
+        $product     = new Product('MAKE_CLIENT_ID', true);
+        $assessments = $product->getAssessments();
+        $this->assertEmpty($assessments);
+    }
+
+    public function testGetTraningError()
+    {
+        $product   = new Product('MAKE_CLIENT_ID', true);
+        $trainings = $product->getTraining();
+        $this->assertEmpty($trainings);
+    }
+
+    public function testGetGamesError()
+    {
+        $product    = new Product('MAKE_CLIENT_ID', true);
+        $games      = $product->getGames();
+        $this->assertEmpty($games);
+    }
+
 }
