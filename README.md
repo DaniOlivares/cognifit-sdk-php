@@ -2,6 +2,10 @@
 
 ## Description
 
+This library helps developers to connect with CogniFit API(https://api.cognifit.com). 
+
+CogniFit API allows CogniFit partners to integrate CogniFit Assessment Batteries and Training Games seamless into their own websites. CogniFit partners can be clinicians, hospitals, schools, universities, researchers and associates.
+
 ## Reference
 
 ### Health Check
@@ -22,8 +26,6 @@ if(!$response->hasError()){
 ```
 
 ### User registration
-
-
 
 #### Create new user account
 
@@ -297,6 +299,7 @@ foreach ($trainingPrograms as $trainingProgramKey => $trainingProgram){
 ```
 
 ### Brain Games
+
 #### Brain Game list
 
 List of allowed games keys to use when starting a unique game session.
