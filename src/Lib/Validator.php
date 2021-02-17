@@ -7,7 +7,7 @@ class Validator {
 	const ALPHANUMERIC 	= 'ALPHANUMERIC';
 	const DATE 			= 'DATE';
 	const EMAIL			= 'EMAIL';
-	const LOCALE		= 'LOCALE';
+    const LOCALE		= 'LOCALE';
 	
 	public function isValid($value, $mandatory, $type){
 		if(is_array($type)){

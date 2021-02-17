@@ -2,6 +2,8 @@
 
 namespace CognifitSdk\Lib;
 
+use CognifitSdk\Lib\UserData;
+
 class Response {
 	
 	private $data			= array();
@@ -14,7 +16,7 @@ class Response {
 			$this->error 		= $data['error'];
 			$this->errorMessage = isset($data['errorMessage']) ? $data['errorMessage'] : '';
 		}
-		$this->data = $data;		
+		$this->data = $this->_formatData($data);
 	}
 	
 	public function hasError(){
@@ -39,5 +41,14 @@ class Response {
 		}
 		return null;
 	}
+
+	private function _formatData($data){
+	    if(isset($data['userAccounts'])){
+	        foreach ($data['userAccounts'] as $index => $userData){
+                $data['userAccounts'][$index] = UserData::loadUser($userData);
+            }
+        }
+	    return $data;
+    }
 	
 }

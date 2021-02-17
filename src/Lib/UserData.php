@@ -2,12 +2,15 @@
 
 namespace CognifitSdk\Lib;
 
+use CognifitSdk\Lib\Licenses;
 use CognifitSdk\Lib\Validator;
 
 class UserData {
 
-	private $attributes;
-	private $changesAttributes = array();
+	private array       $attributes;
+	private array       $changesAttributes = array();
+	private string      $userToken         = '';
+	private Licenses    $licenses;
 
 	public function __construct(array $data){
 		$this->attributes = $this->initAttributes();
@@ -18,6 +21,21 @@ class UserData {
 			}
 		}
 	}
+
+    public function loadUser(array $data): self{
+	    $object = new self($data);
+        $object->userToken  = $data['user_token'];
+        $object->licenses   = new Licenses($data['licenses']);
+	    return $object;
+    }
+
+    public function getUserToken(): string{
+        return $this->userToken;
+    }
+
+    public function getLicenses(): Licenses{
+        return $this->licenses;
+    }
 
     public function getAttributesForRegistration(){
         $validator 	= new Validator();
@@ -45,10 +63,14 @@ class UserData {
         return $keysValues;
     }
 
+    public function getValue($attributeKey){
+	    return $this->attributes[$attributeKey]['value'];
+    }
+
     private function initAttributes(){
 	    $this->changesAttributes = array();
 		return [
-			'user_name'		=> $this->initAttribute('', true,	Validator::ALPHANUMERIC),
+		    'user_name'		=> $this->initAttribute('', true,	Validator::ALPHANUMERIC),
 			'user_lastname'	=> $this->initAttribute('', false, 	Validator::ALPHANUMERIC),
 			'user_email'	=> $this->initAttribute('', true,	Validator::EMAIL),
 			'user_password'	=> $this->initAttribute('', true,	Validator::ALPHANUMERIC),
