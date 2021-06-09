@@ -275,8 +275,9 @@ List of allowed assessment keys to use when setting a training program.
 ```PHP
 use CognifitSdk\Api\Product;
 
-$product        = new Product(env('COGNIFIT_CLIENT_ID'), true);
-$assessments    = $product->getAssessments();
+$localesForAssets   = ['en', 'es'];
+$product            = new Product(env('COGNIFIT_CLIENT_ID'), true);
+$assessments        = $product->getAssessments($localesForAssets);
 foreach ($assessments as $assessmentKey => $assessment){
     echo $assessment->getKey();
 }   
@@ -291,8 +292,9 @@ List of allowed training keys to use when setting a training program.
 ```PHP
 use CognifitSdk\Api\Product;
 
+$localesForAssets  = ['en', 'es'];
 $product           = new Product(env('COGNIFIT_CLIENT_ID'), true);
-$trainingPrograms  = $product->getTraining();
+$trainingPrograms  = $product->getTraining($localesForAssets);
 foreach ($trainingPrograms as $trainingProgramKey => $trainingProgram){
     echo $trainingProgram->getKey();
 }   
@@ -307,10 +309,26 @@ List of allowed games keys to use when starting a unique game session.
 ```PHP
 use CognifitSdk\Api\Product;
 
-$product    = new Product(env('COGNIFIT_CLIENT_ID'), true);
-$games      = $product->getGames();
+$localesForAssets   = ['en', 'es'];
+$product            = new Product(env('COGNIFIT_CLIENT_ID'), true);
+$games              = $product->getGames($localesForAssets);
 foreach ($games as $gameKey => $game){
     echo $game->getKey();
+}   
+```
+
+#### Cognitive Skill list
+
+List of cognitive skills measured and trained by CogniFit.
+
+```PHP
+use CognifitSdk\Api\Skills;
+
+$localesForAssets   = ['en', 'es'];
+$skills             = new Skills(env('COGNIFIT_CLIENT_ID'), true);
+$skillList          = $skills->getSkills($localesForAssets);
+foreach ($skillList as $skill){
+    echo $skill->getKey();
 }   
 ```
 
