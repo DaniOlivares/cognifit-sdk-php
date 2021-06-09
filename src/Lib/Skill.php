@@ -1,19 +1,14 @@
 <?php
 
-namespace CognifitSdk\Lib\Products;
+namespace CognifitSdk\Lib;
 
-class ProductInterface {
+class Skill {
 
     protected $key = '';
-    protected $skills = [];
     protected $assets = [];
 
     public function getKey(){
         return $this->key;
-    }
-
-    public function getSkills(){
-        return $this->skills;
     }
 
     public function getAssets(){
@@ -30,7 +25,6 @@ class ProductInterface {
 
     protected function __construct(array $data){
         $this->key      = $data['key'];
-        $this->skills   = $data['skills'];
         $this->assets   = $data['assets'];
     }
 

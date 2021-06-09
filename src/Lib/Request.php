@@ -86,4 +86,14 @@ class Request {
         return $domain;
     }
 
+    protected function urlEncodeLocales($locales){
+        $str = '';
+        if($locales){
+            foreach ($locales as $locale){
+                $str .= '&locales[]=' . $locale;
+            }
+        }
+        return $str;
+    }
+
 }

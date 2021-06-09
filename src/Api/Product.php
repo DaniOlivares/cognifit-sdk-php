@@ -17,20 +17,23 @@ class Product extends Request {
         parent::__construct($clientId, '', $sandbox);
     }
 
-    public function getAssessments(){
+    public function getAssessments($locales = array()){
         $resource = self::RESOURCE_PATH_ASSESSMENT . '?client_id=' . $this->clientId;
+        $resource .= $this->urlEncodeLocales($locales);
         $response = $this->doRequest($resource, array(), 'GET');
         return Assessment::buildList((!$response->hasError()) ? $response->getData() : array());
     }
 
-    public function getTraining(){
+    public function getTraining($locales = array()){
         $resource = self::RESOURCE_PATH_TRAINING . '?client_id=' . $this->clientId;
+        $resource .= $this->urlEncodeLocales($locales);
         $response = $this->doRequest($resource, array(), 'GET');
         return Training::buildList((!$response->hasError()) ? $response->getData() : array());
     }
 
-    public function getGames(){
+    public function getGames($locales = array()){
         $resource = self::RESOURCE_PATH_GAME . '?client_id=' . $this->clientId;
+        $resource .= $this->urlEncodeLocales($locales);
         $response = $this->doRequest($resource, array(), 'GET');
         return Game::buildList((!$response->hasError()) ? $response->getData() : array());
     }
