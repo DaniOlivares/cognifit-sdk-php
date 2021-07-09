@@ -18,13 +18,18 @@ class ProductsTest extends TestCase {
             $this->assertEquals($assessmentKey, $assessment->getKey());
             $this->assertIsArray($assessment->getSkills());
             $this->assertIsArray($assessment->getAssets());
+            $this->assertIsInt($assessment->getEstimatedTime());
+            $this->assertIsArray($assessment->getTasks());
             $this->_validateTitlesAndDescriptionOnlyEnglish($assessment);
             $this->assertArrayHasKey('images', $assessment->getAssets());
             $this->assertArrayHasKey('scareIconZodiac', $assessment->getAssets()['images']);
+            $this->assertGreaterThan(0, $assessment->getEstimatedTime());
+            $this->assertIsString($assessment->getTasks()[0]);
+            $this->assertNotEquals('', $assessment->getTasks()[0]);
         }
     }
 
-    public function testGetTraning()
+    public function testGetTraining()
     {
         $product   = new Product(getenv('TEST_CLIENT_ID'), true);
         $trainings = $product->getTraining();
@@ -69,13 +74,18 @@ class ProductsTest extends TestCase {
             $this->assertEquals($assessmentKey, $assessment->getKey());
             $this->assertIsArray($assessment->getSkills());
             $this->assertIsArray($assessment->getAssets());
+            $this->assertIsInt($assessment->getEstimatedTime());
+            $this->assertIsArray($assessment->getTasks());
             $this->_validateTitlesAndDescriptionTestingLocales($assessment);
             $this->assertArrayHasKey('images', $assessment->getAssets());
             $this->assertArrayHasKey('scareIconZodiac', $assessment->getAssets()['images']);
+            $this->assertGreaterThan(0, $assessment->getEstimatedTime());
+            $this->assertIsString($assessment->getTasks()[0]);
+            $this->assertNotEquals('', $assessment->getTasks()[0]);
         }
     }
 
-    public function testGetTraningWithLocales()
+    public function testGetTrainingWithLocales()
     {
         $product   = new Product(getenv('TEST_CLIENT_ID'), true);
         $trainings = $product->getTraining($this->_getTestingLocales());
@@ -117,7 +127,7 @@ class ProductsTest extends TestCase {
         $this->assertEmpty($assessments);
     }
 
-    public function testGetTraningError()
+    public function testGetTrainingError()
     {
         $product   = new Product('MAKE_CLIENT_ID', true);
         $trainings = $product->getTraining();

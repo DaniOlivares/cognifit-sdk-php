@@ -51,9 +51,9 @@ class UserActivityTest extends TestCase {
 
     public function testGetPlayedGamesFail()
     {
-        $this->expectException(Error::class);
         $healthCheckInstance = new UserActivity('FAKE_CLIENT_ID', 'FAKE_SECRET_ID');
-        $healthCheckInstance->getPlayedGames('FAKE_USER_ID');
+        $response = $healthCheckInstance->getPlayedGames('FAKE_USER_ID');
+        $this->assertEquals(true, $response->hasError());
     }
 
 }
