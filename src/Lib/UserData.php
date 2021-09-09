@@ -22,7 +22,7 @@ class UserData {
 		}
 	}
 
-    public function loadUser(array $data): self{
+    public static function loadUser(array $data): self{
 	    $object = new self($data);
         $object->userToken  = $data['user_token'];
         $object->licenses   = new Licenses($data['licenses']);
