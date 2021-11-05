@@ -1,0 +1,5 @@
+<?php
+putenv('TEST_CLIENT_ID=');
+putenv('TEST_CLIENT_SECRET=');
+putenv('TEST_CLIENT_HASH=');
+putenv('TEST_USER_ID=');
