@@ -9,7 +9,7 @@ class UserAccount extends Request {
 
     const RESOURCE_PATH                 = '/registration';
     const RESOURCE_PATH_UPDATE          = '/update-user';
-    const RESOURCE_PATH_DELETE          = '/patient/deactivate';
+    const RESOURCE_PATH_DELETE          = '/delete-user';
     const RESOURCE_PATH_ASSOCIATE       = '/user-authenticate';
     const RESOURCE_PATH_ACTIVATE        = '/patient/activate';
     const RESOURCE_PATH_DEACTIVATE      = '/patient/deactivate';
