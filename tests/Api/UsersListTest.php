@@ -1,6 +1,8 @@
 <?php
+namespace Api;
 
 use CognifitSdk\Api\UsersList;
+use CognifitSdk\Lib\UserData;
 use PHPUnit\Framework\TestCase;
 
 include_once dirname(__FILE__) . '/../.environment-test.php';
@@ -8,7 +10,7 @@ include_once dirname(__FILE__) . '/../.environment-test.php';
 class UsersListTest extends TestCase
 {
 
-    public function testGetUrlStartCognifit(){
+    public function testUserList(){
 
         $usersListInstance  = new UsersList(getenv('TEST_CLIENT_ID'), getenv('TEST_CLIENT_SECRET'), true);
         $response           = $usersListInstance->get();
@@ -17,8 +19,23 @@ class UsersListTest extends TestCase
         $this->assertArrayHasKey('morePages', $response->getData());
         $this->assertArrayHasKey('userAccounts', $response->getData());
         $userAccounts   = $response->get('userAccounts');
-        $userAccount    = $userAccounts[0];
+
         $this->assertIsArray($userAccounts);
+
+        foreach ($userAccounts as $userAccount){
+            $this->assertIsBool($userAccount->getLicenses()->isActiveTrainingLicense());
+            if($userAccount->getLicenses()->isActiveTrainingLicense()){
+                return $userAccount;
+            }
+        }
+
+        return $userAccounts[0];
+    }
+
+    /**
+     * @depends testUserList
+     */
+    public function testUserValues(UserData $userAccount){
         $this->assertInstanceOf('CognifitSdk\Lib\UserData', $userAccount);
         $this->assertNotEmpty($userAccount->getUserToken());
         $this->assertNotEmpty($userAccount->getValue('user_name'));

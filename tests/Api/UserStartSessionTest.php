@@ -1,4 +1,5 @@
 <?php
+namespace Api;
 
 use CognifitSdk\Api\UserStartSession;
 use PHPUnit\Framework\TestCase;
@@ -8,9 +9,9 @@ include_once dirname(__FILE__) . '/../.environment-test.php';
 class UserStartSessionTest extends TestCase
 {
 
-    private $userToken      = 'USER_ACCESS_TOKEN';
-    private $clientHash     = 'CLIENT_HASH';
-    private $callbackUrl    = 'http://www.callback.test/testing';
+    private string $userToken      = 'USER_ACCESS_TOKEN';
+    private string $clientHash     = 'CLIENT_HASH';
+    private string $callbackUrl    = 'http://www.callback.test/testing';
 
     public function testGetUrlStartCognifit(){
 

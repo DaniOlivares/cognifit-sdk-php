@@ -1,6 +1,10 @@
 <?php
+namespace Api;
+
 use PHPUnit\Framework\TestCase;
+
 use CognifitSdk\Api\UserAccessToken;
+use CognifitSdk;
 
 include_once dirname(__FILE__) . '/../.environment-test.php';
 

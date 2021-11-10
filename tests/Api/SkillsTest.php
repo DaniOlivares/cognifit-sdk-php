@@ -1,4 +1,5 @@
 <?php
+namespace Api;
 
 use PHPUnit\Framework\TestCase;
 
@@ -54,7 +55,7 @@ class SkillsTest extends TestCase {
         $this->assertCount(1, $element->getAssets()['titles']);
         $this->assertArrayHasKey('en', $element->getAssets()['titles']);
         $this->assertArrayHasKey('descriptions', $element->getAssets());
-        $this->assertCount(1, $element->getAssets()['descriptions']);;
+        $this->assertCount(1, $element->getAssets()['descriptions']);
         $this->assertArrayHasKey('en', $element->getAssets()['descriptions']);
 
     }
@@ -71,7 +72,7 @@ class SkillsTest extends TestCase {
         }
     }
 
-    private function _getTestingLocales(){
+    private function _getTestingLocales(): array{
         return ['fr', 'es', 'pt_BR'];
     }
 
