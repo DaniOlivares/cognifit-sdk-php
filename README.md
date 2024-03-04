@@ -15,8 +15,7 @@ use CognifitSdk\Api\HealthCheck;
 
 $cognifitApiHealthCheck = new HealthCheck(
     env('COGNIFIT_CLIENT_ID'),
-    env('COGNIFIT_CLIENT_SECRET'),
-    env('COGNIFIT_API_SANDBOX')
+    env('COGNIFIT_CLIENT_SECRET')
 );
 $response = $cognifitApiHealthCheck->getInfo();
 
@@ -40,8 +39,7 @@ $locale                 = 'en';
 $userPassword           = 'RANDOM_PASSWORD_OR_USER_KNOWN_PASSWORD';
 $cognifitApiUserAccount = new UserAccount(
     env('COGNIFIT_CLIENT_ID'),
-    env('COGNIFIT_CLIENT_SECRET'),
-    env('COGNIFIT_API_SANDBOX')
+    env('COGNIFIT_CLIENT_SECRET')
 );
 $response = $cognifitApiUserAccount->registration(new UserData([
     'user_name'     => $userName,
@@ -74,8 +72,7 @@ use CognifitSdk\Api\UserAccount;
 
 $cognifitApiUserAccount = new UserAccount(
     env('COGNIFIT_CLIENT_ID'),
-    env('COGNIFIT_CLIENT_SECRET'),
-    env('COGNIFIT_API_SANDBOX')
+    env('COGNIFIT_CLIENT_SECRET')
 );
 
 $userEmail = 'joe@example.com';
@@ -106,8 +103,7 @@ use CognifitSdk\Api\UserAccessToken;
 $cognifitUserToken          = 'USER_TOKEN';
 $cognifitApiUserAccessToken = new UserAccessToken(
     env('COGNIFIT_CLIENT_ID'),
-    env('COGNIFIT_CLIENT_SECRET'),
-    env('COGNIFIT_API_SANDBOX')
+    env('COGNIFIT_CLIENT_SECRET')
 );
 $response = $cognifitApiUserAccessToken->issue($cognifitUserToken);
 if(!$response->hasError()){
@@ -123,7 +119,7 @@ use CognifitSdk\Api\UserStartSession;
 $cognifitStartSession = new UserStartSession(
     env('COGNIFIT_CLIENT_ID'),
     env('COGNIFIT_CLIENT_SECRET'),
-    env('COGNIFIT_API_SANDBOX'),
+    false,
     env('COGNIFIT_HASH')
 );
 
@@ -150,8 +146,7 @@ $locale                 = 'en';
 $userPassword           = 'RANDOM_PASSWORD_OR_USER_KNOWN_PASSWORD';
 $cognifitApiUserAccount = new UserAccount(
     env('COGNIFIT_CLIENT_ID'),
-    env('COGNIFIT_CLIENT_SECRET'),
-    env('COGNIFIT_API_SANDBOX')
+    env('COGNIFIT_CLIENT_SECRET')
 );
 $response = $cognifitApiUserAccount->update($userToken, new UserData([
     'user_name'     => $userName,
@@ -176,8 +171,7 @@ use CognifitSdk\Api\UserAccount;
 $userToken              = 'USER_TOKEN';
 $cognifitApiUserAccount = new UserAccount(
     env('COGNIFIT_CLIENT_ID'),
-    env('COGNIFIT_CLIENT_SECRET'),
-    env('COGNIFIT_API_SANDBOX')
+    env('COGNIFIT_CLIENT_SECRET')
 );
 $response = $cognifitApiUserAccount->activate($userToken);
 
@@ -196,8 +190,7 @@ use CognifitSdk\Api\UserAccount;
 $userToken              = 'USER_TOKEN';
 $cognifitApiUserAccount = new UserAccount(
     env('COGNIFIT_CLIENT_ID'),
-    env('COGNIFIT_CLIENT_SECRET'),
-    env('COGNIFIT_API_SANDBOX')
+    env('COGNIFIT_CLIENT_SECRET')
 );
 $response = $cognifitApiUserAccount->deactivate($userToken);
 
@@ -216,8 +209,7 @@ use CognifitSdk\Api\UserAccount;
 $userToken              = 'USER_TOKEN';
 $cognifitApiUserAccount = new UserAccount(
     env('COGNIFIT_CLIENT_ID'),
-    env('COGNIFIT_CLIENT_SECRET'),
-    env('COGNIFIT_API_SANDBOX')
+    env('COGNIFIT_CLIENT_SECRET')
 );
 $response = $cognifitApiUserAccount->grantTrainingLicense($userToken);
 
@@ -236,8 +228,7 @@ use CognifitSdk\Api\UserAccount;
 $userToken              = 'USER_TOKEN';
 $cognifitApiUserAccount = new UserAccount(
     env('COGNIFIT_CLIENT_ID'),
-    env('COGNIFIT_CLIENT_SECRET'),
-    env('COGNIFIT_API_SANDBOX')
+    env('COGNIFIT_CLIENT_SECRET')
 );
 $response = $cognifitApiUserAccount->revokeTrainingLicense($userToken);
 
@@ -256,8 +247,7 @@ use CognifitSdk\Api\UserAccount;
 $userToken              = 'USER_TOKEN';
 $cognifitApiUserAccount = new UserAccount(
     env('COGNIFIT_CLIENT_ID'),
-    env('COGNIFIT_CLIENT_SECRET'),
-    env('COGNIFIT_API_SANDBOX')
+    env('COGNIFIT_CLIENT_SECRET')
 );
 $response = $cognifitApiUserAccount->delete($userToken);
 
@@ -390,8 +380,7 @@ use CognifitSdk\Api\UserActivity;
 $cognifitUserToken       = 'USER_TOKEN';
 $cognifitApiUserActivity = new UserActivity(
     env('COGNIFIT_CLIENT_ID'),
-    env('COGNIFIT_CLIENT_SECRET'),
-    env('COGNIFIT_API_SANDBOX')
+    env('COGNIFIT_CLIENT_SECRET')
 );
 $response = $cognifitApiUserActivity->getHistoricalScoreAndSkills($cognifitUserToken);
 if(!$response->hasError()){
@@ -408,8 +397,7 @@ use CognifitSdk\Api\UserActivity;
 $cognifitUserToken       = 'USER_TOKEN';
 $cognifitApiUserActivity = new UserActivity(
     env('COGNIFIT_CLIENT_ID'),
-    env('COGNIFIT_CLIENT_SECRET'),
-    env('COGNIFIT_API_SANDBOX')
+    env('COGNIFIT_CLIENT_SECRET')
 );
 $response = $cognifitApiUserActivity->getPlayedGames($cognifitUserToken);
 if(!$response->hasError()){
