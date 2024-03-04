@@ -273,6 +273,21 @@ foreach ($assessments as $assessmentKey => $assessment){
 }   
 ```
 
+#### Single task assessment list
+
+List of allowed single task assessment keys to use when setting a program.
+
+```PHP
+use CognifitSdk\Api\Product;
+
+$localesForAssets   = ['en', 'es'];
+$product            = new Product(env('COGNIFIT_CLIENT_ID'), true);
+$assessments        = $product->getAssessmentTasks($localesForAssets);
+foreach ($assessments as $assessmentKey => $assessment){
+    echo $assessment->getKey();
+}   
+```
+
 #### Questionnaires list
 
 List of allowed questionnaire keys to use when setting a program.
