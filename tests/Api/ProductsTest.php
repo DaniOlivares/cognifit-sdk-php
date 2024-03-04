@@ -14,6 +14,29 @@ class ProductsTest extends TestCase {
         $product     = new Product(getenv('TEST_CLIENT_ID'), true);
         $assessments = $product->getAssessments();
         $this->assertArrayHasKey('GENERAL_ASSESSMENT', $assessments);
+        $this->assertArrayNotHasKey('VISUAL_EPISODIC_TASK_ASSESSMENT', $assessments);
+        foreach ($assessments as $assessmentKey => $assessment){
+            $this->assertInstanceOf('CognifitSdk\Lib\Products\Assessment', $assessment);
+            $this->assertEquals($assessmentKey, $assessment->getKey());
+            $this->assertIsArray($assessment->getSkills());
+            $this->assertIsArray($assessment->getAssets());
+            $this->assertIsInt($assessment->getEstimatedTime());
+            $this->assertIsArray($assessment->getTasks());
+            $this->_validateTitlesAndDescriptionOnlyEnglish($assessment);
+            $this->assertArrayHasKey('images', $assessment->getAssets());
+            $this->assertArrayHasKey('scareIconZodiac', $assessment->getAssets()['images']);
+            $this->assertGreaterThan(0, $assessment->getEstimatedTime());
+            $this->assertIsString($assessment->getTasks()[0]);
+            $this->assertNotEquals('', $assessment->getTasks()[0]);
+        }
+    }
+
+    public function testGetAssessmentTasks()
+    {
+        $product     = new Product(getenv('TEST_CLIENT_ID'), true);
+        $assessments = $product->getAssessmentTasks();
+        $this->assertArrayHasKey('VISUAL_EPISODIC_TASK_ASSESSMENT', $assessments);
+        $this->assertArrayNotHasKey('GENERAL_ASSESSMENT', $assessments);
         foreach ($assessments as $assessmentKey => $assessment){
             $this->assertInstanceOf('CognifitSdk\Lib\Products\Assessment', $assessment);
             $this->assertEquals($assessmentKey, $assessment->getKey());
@@ -86,6 +109,29 @@ class ProductsTest extends TestCase {
         $product     = new Product(getenv('TEST_CLIENT_ID'), true);
         $assessments = $product->getAssessments($this->_getTestingLocales());
         $this->assertArrayHasKey('GENERAL_ASSESSMENT', $assessments);
+        $this->assertArrayNotHasKey('VISUAL_EPISODIC_TASK_ASSESSMENT', $assessments);
+        foreach ($assessments as $assessmentKey => $assessment){
+            $this->assertInstanceOf('CognifitSdk\Lib\Products\Assessment', $assessment);
+            $this->assertEquals($assessmentKey, $assessment->getKey());
+            $this->assertIsArray($assessment->getSkills());
+            $this->assertIsArray($assessment->getAssets());
+            $this->assertIsInt($assessment->getEstimatedTime());
+            $this->assertIsArray($assessment->getTasks());
+            $this->_validateTitlesAndDescriptionTestingLocales($assessment);
+            $this->assertArrayHasKey('images', $assessment->getAssets());
+            $this->assertArrayHasKey('scareIconZodiac', $assessment->getAssets()['images']);
+            $this->assertGreaterThan(0, $assessment->getEstimatedTime());
+            $this->assertIsString($assessment->getTasks()[0]);
+            $this->assertNotEquals('', $assessment->getTasks()[0]);
+        }
+    }
+
+    public function testGetAssessmentTasksWithLocales()
+    {
+        $product     = new Product(getenv('TEST_CLIENT_ID'), true);
+        $assessments = $product->getAssessmentTasks($this->_getTestingLocales());
+        $this->assertArrayHasKey('VISUAL_EPISODIC_TASK_ASSESSMENT', $assessments);
+        $this->assertArrayNotHasKey('GENERAL_ASSESSMENT', $assessments);
         foreach ($assessments as $assessmentKey => $assessment){
             $this->assertInstanceOf('CognifitSdk\Lib\Products\Assessment', $assessment);
             $this->assertEquals($assessmentKey, $assessment->getKey());
@@ -156,6 +202,13 @@ class ProductsTest extends TestCase {
     {
         $product     = new Product('MAKE_CLIENT_ID', true);
         $assessments = $product->getAssessments();
+        $this->assertEmpty($assessments);
+    }
+
+    public function testGetAssessmentTaskssError()
+    {
+        $product     = new Product('MAKE_CLIENT_ID', true);
+        $assessments = $product->getAssessmentTasks();
         $this->assertEmpty($assessments);
     }
 

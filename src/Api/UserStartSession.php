@@ -21,6 +21,10 @@ class UserStartSession extends Request {
         return $this->_getUrl($userAccessToken, $callbackUrl, 'assessment', $sessionKey);
     }
 
+    public function getUrlStartCognifitForAssessmentTask(string $userAccessToken, string $callbackUrl = '', string $sessionKey = ''){
+        return $this->getUrlStartCognifitForAssessment($userAccessToken, $callbackUrl, $sessionKey);
+    }
+
     public function getUrlStartCognifitForQuestionnaire(string $userAccessToken, string $callbackUrl = '', string $sessionKey = ''){
         return $this->getUrlStartCognifitForAssessment($userAccessToken, $callbackUrl, $sessionKey);
     }

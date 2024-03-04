@@ -352,7 +352,7 @@ $userStartSession   = new UserStartSession(getenv('TEST_CLIENT_ID'), '', true, g
 $urlToStartSession  = $userStartSession->getUrlStartCognifitForTraining($this->userToken, $this->callbackUrl, 'DRIVING');   
 ```
 
-#### Assessment program
+#### Assessment, Single Task Assessment & Questionnaire program
 
 ```PHP
 use CognifitSdk\Api\UserStartSession;

@@ -37,6 +37,18 @@ class UserStartSessionTest extends TestCase
 
     }
 
+    public function testGetUrlStartCognifitForAssessmentTask(){
+
+        $userStartSession   = new UserStartSession(getenv('TEST_CLIENT_ID'), '', true, $this->clientHash);
+        $urlToStartSession  = $userStartSession->getUrlStartCognifitForAssessmentTask($this->userToken, $this->callbackUrl, 'DRIVING_ASSESSMENT');
+
+        $this->assertStringContainsString(getenv('TEST_CLIENT_ID'), $urlToStartSession);
+        $this->assertStringContainsString($this->clientHash, $urlToStartSession);
+        $this->assertStringContainsString($this->userToken, $urlToStartSession);
+        $this->assertStringContainsString(urlencode($this->callbackUrl), $urlToStartSession);
+
+    }
+
     public function testGetUrlStartCognifitForQuestionnaire(){
 
         $userStartSession   = new UserStartSession(getenv('TEST_CLIENT_ID'), '', true, $this->clientHash);
