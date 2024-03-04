@@ -47,7 +47,7 @@ class UsersListTest extends TestCase
         $this->assertInstanceOf('CognifitSdk\Lib\Licenses', $userAccount->getLicenses());
         $this->assertIsArray($userAccount->getLicenses()->getPendingAssessmentLicenses());
         $this->assertIsArray($userAccount->getLicenses()->getUsedAssessmentLicenses());
-        $this->assertEquals(true, $userAccount->getLicenses()->isActiveTrainingLicense());
+        $this->assertTrue($userAccount->getLicenses()->isActiveTrainingLicense());
         $this->assertRegExp('/^[0-9][0-9][0-9][0-9]-[0-1][0-9]-[0-3][0-9]$/', $userAccount->getLicenses()->getTrainingExpirationDate());
     }
 
