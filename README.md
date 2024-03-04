@@ -260,7 +260,7 @@ if(!$response->hasError()){
 
 #### Assessments list
 
-List of allowed assessment keys to use when setting a training program.
+List of allowed assessment keys to use when setting a program.
 
 ```PHP
 use CognifitSdk\Api\Product;
@@ -270,6 +270,21 @@ $product            = new Product(env('COGNIFIT_CLIENT_ID'), true);
 $assessments        = $product->getAssessments($localesForAssets);
 foreach ($assessments as $assessmentKey => $assessment){
     echo $assessment->getKey();
+}   
+```
+
+#### Questionnaires list
+
+List of allowed questionnaire keys to use when setting a program.
+
+```PHP
+use CognifitSdk\Api\Product;
+
+$localesForAssets   = ['en', 'es'];
+$product            = new Product(env('COGNIFIT_CLIENT_ID'), true);
+$questionnaires     = $product->getQuestionnaires($localesForAssets);
+foreach ($questionnaires as $questionnaireKey => $questionnaire){
+    echo $questionnaire->getKey();
 }   
 ```
 

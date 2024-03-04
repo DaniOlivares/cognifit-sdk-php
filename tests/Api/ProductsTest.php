@@ -65,6 +65,22 @@ class ProductsTest extends TestCase {
         }
     }
 
+    public function testGetQuestionnaires()
+    {
+        $product        = new Product(getenv('TEST_CLIENT_ID'), true);
+        $questionnaires = $product->getQuestionnaires();
+        $this->assertArrayHasKey('PHQ2_QUESTIONNAIRE_ASSESSMENT', $questionnaires);
+        foreach ($questionnaires as $questionnaireKey => $questionnaire){
+            $this->assertInstanceOf('CognifitSdk\Lib\Products\Questionnaire', $questionnaire);
+            $this->assertEquals($questionnaireKey, $questionnaire->getKey());
+            $this->assertIsArray($questionnaire->getSkills());
+            $this->assertIsArray($questionnaire->getAssets());
+            $this->_validateTitlesAndDescriptionOnlyEnglish($questionnaire);
+            $this->assertArrayHasKey('images', $questionnaire->getAssets());
+            $this->assertArrayHasKey('scareIconZodiac', $questionnaire->getAssets()['images']);
+        }
+    }
+
     public function testGetAssessmentsWithLocales()
     {
         $product     = new Product(getenv('TEST_CLIENT_ID'), true);
@@ -83,6 +99,21 @@ class ProductsTest extends TestCase {
             $this->assertGreaterThan(0, $assessment->getEstimatedTime());
             $this->assertIsString($assessment->getTasks()[0]);
             $this->assertNotEquals('', $assessment->getTasks()[0]);
+        }
+    }
+
+    public function testGetQuestionnairesWithLocales()
+    {
+        $product        = new Product(getenv('TEST_CLIENT_ID'), true);
+        $questionnaires = $product->getQuestionnaires($this->_getTestingLocales());
+        $this->assertArrayHasKey('PCPTSD5_QUESTIONNAIRE_ASSESSMENT', $questionnaires);
+        foreach ($questionnaires as $questionnaireKey => $questionnaire){
+            $this->assertInstanceOf('CognifitSdk\Lib\Products\Questionnaire', $questionnaire);
+            $this->assertEquals($questionnaireKey, $questionnaire->getKey());
+            $this->assertIsArray($questionnaire->getAssets());
+            $this->_validateTitlesAndDescriptionTestingLocales($questionnaire);
+            $this->assertArrayHasKey('images', $questionnaire->getAssets());
+            $this->assertArrayHasKey('scareIconZodiac', $questionnaire->getAssets()['images']);
         }
     }
 
@@ -126,6 +157,13 @@ class ProductsTest extends TestCase {
         $product     = new Product('MAKE_CLIENT_ID', true);
         $assessments = $product->getAssessments();
         $this->assertEmpty($assessments);
+    }
+
+    public function testGetQuestionnairesError()
+    {
+        $product        = new Product('MAKE_CLIENT_ID', true);
+        $questionnaires = $product->getQuestionnaires();
+        $this->assertEmpty($questionnaires);
     }
 
     public function testGetTrainingError()
