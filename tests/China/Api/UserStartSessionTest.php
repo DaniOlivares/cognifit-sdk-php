@@ -15,7 +15,8 @@ class UserStartSessionTest extends TestCase
 
     public function testGetUrlStartCognifit(){
 
-        $userStartSession   = new UserStartSession(getenv('TEST_CLIENT_ID_CHINA'), '', true, $this->clientHash, 'CHINA');
+        $userStartSession   = new UserStartSession(getenv('TEST_CLIENT_ID_CHINA'), '', true, $this->clientHash);
+        $userStartSession->setChinaProjectRegion();
         $urlToStartSession  = $userStartSession->getUrlStartCognifit($this->userToken, $this->callbackUrl);
 
         $this->assertStringContainsString(getenv('TEST_CLIENT_ID_CHINA'), $urlToStartSession);
@@ -27,7 +28,8 @@ class UserStartSessionTest extends TestCase
 
     public function testGetUrlStartCognifitForAssessment(){
 
-        $userStartSession   = new UserStartSession(getenv('TEST_CLIENT_ID_CHINA'), '', true, $this->clientHash, 'CHINA');
+        $userStartSession   = new UserStartSession(getenv('TEST_CLIENT_ID_CHINA'), '', true, $this->clientHash);
+        $userStartSession->setChinaProjectRegion();
         $urlToStartSession  = $userStartSession->getUrlStartCognifitForAssessment($this->userToken, $this->callbackUrl, 'DRIVING_ASSESSMENT');
 
         $this->assertStringContainsString(getenv('TEST_CLIENT_ID_CHINA'), $urlToStartSession);
@@ -39,7 +41,8 @@ class UserStartSessionTest extends TestCase
 
     public function testGetUrlStartCognifitForAssessmentTask(){
 
-        $userStartSession   = new UserStartSession(getenv('TEST_CLIENT_ID_CHINA'), '', true, $this->clientHash, 'CHINA');
+        $userStartSession   = new UserStartSession(getenv('TEST_CLIENT_ID_CHINA'), '', true, $this->clientHash);
+        $userStartSession->setChinaProjectRegion();
         $urlToStartSession  = $userStartSession->getUrlStartCognifitForAssessmentTask($this->userToken, $this->callbackUrl, 'DRIVING_ASSESSMENT');
 
         $this->assertStringContainsString(getenv('TEST_CLIENT_ID_CHINA'), $urlToStartSession);
@@ -51,7 +54,8 @@ class UserStartSessionTest extends TestCase
 
     public function testGetUrlStartCognifitForQuestionnaire(){
 
-        $userStartSession   = new UserStartSession(getenv('TEST_CLIENT_ID_CHINA'), '', true, $this->clientHash, 'CHINA');
+        $userStartSession   = new UserStartSession(getenv('TEST_CLIENT_ID_CHINA'), '', true, $this->clientHash);
+        $userStartSession->setChinaProjectRegion();
         $urlToStartSession  = $userStartSession->getUrlStartCognifitForQuestionnaire($this->userToken, $this->callbackUrl, 'PCPTSD5_QUESTIONNAIRE_ASSESSMENT');
 
         $this->assertStringContainsString(getenv('TEST_CLIENT_ID_CHINA'), $urlToStartSession);
@@ -63,7 +67,8 @@ class UserStartSessionTest extends TestCase
 
     public function testGetUrlStartCognifitForTraining(){
 
-        $userStartSession   = new UserStartSession(getenv('TEST_CLIENT_ID_CHINA'), '', true, $this->clientHash, 'CHINA');
+        $userStartSession   = new UserStartSession(getenv('TEST_CLIENT_ID_CHINA'), '', true, $this->clientHash);
+        $userStartSession->setChinaProjectRegion();
         $urlToStartSession  = $userStartSession->getUrlStartCognifitForTraining($this->userToken, $this->callbackUrl, 'DRIVING');
 
         $this->assertStringContainsString(getenv('TEST_CLIENT_ID_CHINA'), $urlToStartSession);
@@ -75,7 +80,8 @@ class UserStartSessionTest extends TestCase
 
     public function testGetUrlStartCognifitForGame(){
 
-        $userStartSession   = new UserStartSession(getenv('TEST_CLIENT_ID_CHINA'), '', true, $this->clientHash, 'CHINA');
+        $userStartSession   = new UserStartSession(getenv('TEST_CLIENT_ID_CHINA'), '', true, $this->clientHash);
+        $userStartSession->setChinaProjectRegion();
         $urlToStartSession  = $userStartSession->getUrlStartCognifitForGame($this->userToken, $this->callbackUrl, 'MAHJONG');
 
         $this->assertStringContainsString(getenv('TEST_CLIENT_ID_CHINA'), $urlToStartSession);

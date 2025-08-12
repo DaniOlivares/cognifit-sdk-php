@@ -11,7 +11,8 @@ include_once dirname(__FILE__) . '/../../.environment-test.php';
 final class UserAccessTokenTest extends TestCase{
 
     public function testIssueAccessTokenSuccess(){
-        $userAccessTokenInstance = new UserAccessToken(getenv('TEST_CLIENT_ID_CHINA'), getenv('TEST_CLIENT_SECRET_CHINA'), true, 'CHINA');
+        $userAccessTokenInstance = new UserAccessToken(getenv('TEST_CLIENT_ID_CHINA'), getenv('TEST_CLIENT_SECRET_CHINA'), true);
+        $userAccessTokenInstance->setChinaProjectRegion();
         $response                = $userAccessTokenInstance->issue(getenv('TEST_USER_ID_CHINA'));
         $this->assertInstanceOf(
             CognifitSdk\Lib\Response::class,
@@ -23,7 +24,8 @@ final class UserAccessTokenTest extends TestCase{
     }
 
     public function testIssueAccessTokenFailWrongUser(){
-        $userAccessTokenInstance = new UserAccessToken(getenv('TEST_CLIENT_ID_CHINA'), getenv('TEST_CLIENT_SECRET_CHINA'), true, 'CHINA');
+        $userAccessTokenInstance = new UserAccessToken(getenv('TEST_CLIENT_ID_CHINA'), getenv('TEST_CLIENT_SECRET_CHINA'), true);
+        $userAccessTokenInstance->setChinaProjectRegion();
         $response                = $userAccessTokenInstance->issue('FAKE_TOKEN');
         $this->assertInstanceOf(
             CognifitSdk\Lib\Response::class,
@@ -34,7 +36,8 @@ final class UserAccessTokenTest extends TestCase{
     }
 
     public function testIssueAccessTokenFail(){
-		$userAccessTokenInstance = new UserAccessToken('FAKE_CLIENT_ID', 'FAKE_SECRET_ID', true, 'CHINA');
+		$userAccessTokenInstance = new UserAccessToken('FAKE_CLIENT_ID', 'FAKE_SECRET_ID', true);
+        $userAccessTokenInstance->setChinaProjectRegion();
 		$response                = $userAccessTokenInstance->issue('FAKE_TOKEN');
 		$this->assertInstanceOf(
 			CognifitSdk\Lib\Response::class,

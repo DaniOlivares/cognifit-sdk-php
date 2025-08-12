@@ -11,7 +11,8 @@ class SkillsTest extends TestCase {
 
     public function testGetSkills()
     {
-        $skills     = new Skills(getenv('TEST_CLIENT_ID'), true, 'CHINA');
+        $skills     = new Skills(getenv('TEST_CLIENT_ID'), true);
+        $skills->setChinaProjectRegion();
         $skillList  = $skills->getSkills();
         $this->assertIsArray($skillList);
         foreach ($skillList as $skill){
@@ -28,7 +29,8 @@ class SkillsTest extends TestCase {
 
     public function testGetSkillsWithLocales()
     {
-        $skills     = new Skills(getenv('TEST_CLIENT_ID_CHINA'), true, 'CHINA');
+        $skills     = new Skills(getenv('TEST_CLIENT_ID_CHINA'), true);
+        $skills->setChinaProjectRegion();
         $skillList  = $skills->getSkills($this->_getTestingLocales());
         $this->assertIsArray($skillList);
         foreach ($skillList as $skill){
@@ -45,7 +47,8 @@ class SkillsTest extends TestCase {
 
     public function testGetSkillsError()
     {
-        $skills     = new Skills(getenv('FAKE_CLIENT_ID'), true, 'CHINA');
+        $skills     = new Skills(getenv('FAKE_CLIENT_ID'), true);
+        $skills->setChinaProjectRegion();
         $skillList  = $skills->getSkills($this->_getTestingLocales());
         $this->assertEmpty($skillList);
     }

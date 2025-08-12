@@ -31,7 +31,8 @@ class HealthCheckTest extends TestCase {
         $response            = $healthCheckInstance->getInfo();
         $this->assertEquals(true, $response->hasError());
 
-        $healthCheckInstance = new HealthCheck(getenv('TEST_CLIENT_ID_CHINA'), getenv('TEST_CLIENT_SECRET_CHINA'), true, 'CHINA');
+        $healthCheckInstance = new HealthCheck(getenv('TEST_CLIENT_ID_CHINA'), getenv('TEST_CLIENT_SECRET_CHINA'), true);
+        $healthCheckInstance->setChinaProjectRegion();
         $response            = $healthCheckInstance->getInfo();
         $this->assertEquals(false, $response->hasError());
         $this->assertIsArray($response->getData());

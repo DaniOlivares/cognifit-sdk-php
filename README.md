@@ -420,3 +420,23 @@ if(!$response->hasError()){
 }
 ```
 
+## Project Region
+
+By default, all requests are sent to api.cognifit.com, which requires developer credentials available at https://www.cognifit.com/developers.
+
+If you are located in China, you should create your account at https://www.braintraining.cn/developers. To direct your requests to https://api.braintraining.cn, call the setChinaProjectRegion function after instantiating any CognifitSdk\Api class.
+
+```PHP
+use CognifitSdk\Api\UserActivity;
+
+$cognifitUserToken       = 'USER_TOKEN';
+$cognifitApiUserActivity = new UserActivity(
+    env('COGNIFIT_CLIENT_ID'),
+    env('COGNIFIT_CLIENT_SECRET')
+);
+$cognifitApiUserActivity->setChinaProjectRegion();
+$response = $cognifitApiUserActivity->getPlayedGames($cognifitUserToken);
+if(!$response->hasError()){
+    
+}
+```

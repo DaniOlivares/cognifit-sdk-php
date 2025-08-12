@@ -10,11 +10,15 @@ class Request {
     private     string $projectRegion;
 
 	public function __construct(string $clientId, string $clientSecret, $sandbox = false, string $projectRegion = 'US'){
-		$this->clientId 	= $clientId;
-		$this->clientSecret = $clientSecret;
-		$this->sandbox 		= $sandbox;
+		$this->clientId 	 = $clientId;
+		$this->clientSecret  = $clientSecret;
+		$this->sandbox 		 = $sandbox;
         $this->projectRegion = $projectRegion;
 	}
+
+    public function setChinaProjectRegion(){
+        $this->projectRegion = 'CHINA';
+    }
 	
 	protected function doRequest($resourcePath, $bodyParams, $method = 'POST'){
 		

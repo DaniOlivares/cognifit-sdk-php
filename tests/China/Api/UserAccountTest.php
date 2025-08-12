@@ -14,7 +14,8 @@ final class UserAccountTest extends TestCase{
     private UserAccount $userAccountInstance;
 
     public function setUp(): void{
-        $this->userAccountInstance = new UserAccount(getenv('TEST_CLIENT_ID_CHINA'), getenv('TEST_CLIENT_SECRET_CHINA'), true, 'CHINA');
+        $this->userAccountInstance = new UserAccount(getenv('TEST_CLIENT_ID_CHINA'), getenv('TEST_CLIENT_SECRET_CHINA'), true);
+        $this->userAccountInstance->setChinaProjectRegion();
     }
 
     public function testRegistrationUserExists(){

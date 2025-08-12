@@ -11,7 +11,8 @@ class UserActivityTest extends TestCase {
 
     public function testGetHistoricalScoreAndSkills()
     {
-        $healthCheckInstance    = new UserActivity(getenv('TEST_CLIENT_ID_CHINA'), getenv('TEST_CLIENT_SECRET_CHINA'), true, 'CHINA');
+        $healthCheckInstance    = new UserActivity(getenv('TEST_CLIENT_ID_CHINA'), getenv('TEST_CLIENT_SECRET_CHINA'), true);
+        $healthCheckInstance->setChinaProjectRegion();
         $response               = $healthCheckInstance->getHistoricalScoreAndSkills(getenv('TEST_USER_ID_CHINA'));
         $this->assertEquals(false, $response->hasError());
         $this->assertIsArray($response->getData());
@@ -23,7 +24,8 @@ class UserActivityTest extends TestCase {
 
     public function testGetPlayedGames()
     {
-        $healthCheckInstance    = new UserActivity(getenv('TEST_CLIENT_ID_CHINA'), getenv('TEST_CLIENT_SECRET_CHINA'), true, 'CHINA');
+        $healthCheckInstance    = new UserActivity(getenv('TEST_CLIENT_ID_CHINA'), getenv('TEST_CLIENT_SECRET_CHINA'), true);
+        $healthCheckInstance->setChinaProjectRegion();
         $response               = $healthCheckInstance->getPlayedGames(getenv('TEST_USER_ID_CHINA'));
         $this->assertEquals(false, $response->hasError());
         $this->assertIsArray($response->getData());
@@ -45,14 +47,16 @@ class UserActivityTest extends TestCase {
 
     public function testGetHistoricalScoreAndSkillsFail()
     {
-        $healthCheckInstance = new UserActivity('FAKE_CLIENT_ID', 'FAKE_SECRET_ID', false, 'CHINA');
+        $healthCheckInstance = new UserActivity('FAKE_CLIENT_ID', 'FAKE_SECRET_ID', false);
+        $healthCheckInstance->setChinaProjectRegion();
         $response            = $healthCheckInstance->getHistoricalScoreAndSkills('FAKE_USER_ID');
         $this->assertEquals(true, $response->hasError());
     }
 
     public function testGetPlayedGamesFail()
     {
-        $healthCheckInstance = new UserActivity('FAKE_CLIENT_ID', 'FAKE_SECRET_ID', false, 'CHINA');
+        $healthCheckInstance = new UserActivity('FAKE_CLIENT_ID', 'FAKE_SECRET_ID', false);
+        $healthCheckInstance->setChinaProjectRegion();
         $response = $healthCheckInstance->getPlayedGames('FAKE_USER_ID');
         $this->assertEquals(true, $response->hasError());
     }

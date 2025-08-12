@@ -11,7 +11,8 @@ class ProductsTest extends TestCase {
 
     public function testGetAssessments()
     {
-        $product     = new Product(getenv('TEST_CLIENT_ID_CHINA'), true, 'CHINA');
+        $product     = new Product(getenv('TEST_CLIENT_ID_CHINA'), true);
+        $product->setChinaProjectRegion();
         $assessments = $product->getAssessments();
         $this->assertArrayHasKey('GENERAL_ASSESSMENT', $assessments);
         $this->assertArrayNotHasKey('VISUAL_EPISODIC_TASK_ASSESSMENT', $assessments);
@@ -33,7 +34,8 @@ class ProductsTest extends TestCase {
 
     public function testGetAssessmentTasks()
     {
-        $product     = new Product(getenv('TEST_CLIENT_ID_CHINA'), true, 'CHINA');
+        $product     = new Product(getenv('TEST_CLIENT_ID_CHINA'), true);
+        $product->setChinaProjectRegion();
         $assessments = $product->getAssessmentTasks();
         // TODO Add assessment task for China
         $this->assertCount(0, $assessments);
@@ -59,7 +61,8 @@ class ProductsTest extends TestCase {
 
     public function testGetTraining()
     {
-        $product   = new Product(getenv('TEST_CLIENT_ID_CHINA'), true, 'CHINA');
+        $product   = new Product(getenv('TEST_CLIENT_ID_CHINA'), true);
+        $product->setChinaProjectRegion();
         $trainings = $product->getTraining();
         $this->assertArrayHasKey('NORMAL', $trainings);
         foreach ($trainings as $trainingKey => $training){
@@ -78,7 +81,8 @@ class ProductsTest extends TestCase {
 
     public function testGetGames()
     {
-        $product    = new Product(getenv('TEST_CLIENT_ID_CHINA'), true, 'CHINA');
+        $product    = new Product(getenv('TEST_CLIENT_ID_CHINA'), true);
+        $product->setChinaProjectRegion();
         $games      = $product->getGames();
         $this->assertArrayHasKey('MAHJONG', $games);
         foreach ($games as $gameKey => $game){
@@ -94,7 +98,8 @@ class ProductsTest extends TestCase {
 
     public function testGetQuestionnaires()
     {
-        $product        = new Product(getenv('TEST_CLIENT_ID_CHINA'), true, 'CHINA');
+        $product        = new Product(getenv('TEST_CLIENT_ID_CHINA'), true);
+        $product->setChinaProjectRegion();
         $questionnaires = $product->getQuestionnaires();
         // TODO Add questionnaire for China
         $this->assertCount(0, $questionnaires);
@@ -114,7 +119,8 @@ class ProductsTest extends TestCase {
 
     public function testGetAssessmentsWithLocales()
     {
-        $product     = new Product(getenv('TEST_CLIENT_ID_CHINA'), true, 'CHINA');
+        $product     = new Product(getenv('TEST_CLIENT_ID_CHINA'), true);
+        $product->setChinaProjectRegion();
         $assessments = $product->getAssessments($this->_getTestingLocales());
         $this->assertArrayHasKey('GENERAL_ASSESSMENT', $assessments);
         $this->assertArrayNotHasKey('VISUAL_EPISODIC_TASK_ASSESSMENT', $assessments);
@@ -136,7 +142,8 @@ class ProductsTest extends TestCase {
 
     public function testGetAssessmentTasksWithLocales()
     {
-        $product     = new Product(getenv('TEST_CLIENT_ID_CHINA'), true, 'CHINA');
+        $product     = new Product(getenv('TEST_CLIENT_ID_CHINA'), true);
+        $product->setChinaProjectRegion();
         $assessments = $product->getAssessmentTasks($this->_getTestingLocales());
         // TODO Add assessment task for China
         $this->assertCount(0, $assessments);
@@ -162,7 +169,8 @@ class ProductsTest extends TestCase {
 
     public function testGetQuestionnairesWithLocales()
     {
-        $product        = new Product(getenv('TEST_CLIENT_ID_CHINA'), true, 'CHINA');
+        $product        = new Product(getenv('TEST_CLIENT_ID_CHINA'), true);
+        $product->setChinaProjectRegion();
         $questionnaires = $product->getQuestionnaires($this->_getTestingLocales());
         // TODO Add questionnaire for China
         $this->assertCount(0, $questionnaires);
@@ -181,7 +189,8 @@ class ProductsTest extends TestCase {
 
     public function testGetTrainingWithLocales()
     {
-        $product   = new Product(getenv('TEST_CLIENT_ID_CHINA'), true, 'CHINA');
+        $product   = new Product(getenv('TEST_CLIENT_ID_CHINA'), true);
+        $product->setChinaProjectRegion();
         $trainings = $product->getTraining($this->_getTestingLocales());
         $this->assertArrayHasKey('NORMAL', $trainings);
         foreach ($trainings as $trainingKey => $training){
@@ -200,7 +209,8 @@ class ProductsTest extends TestCase {
 
     public function testGetGamesWithLocales()
     {
-        $product    = new Product(getenv('TEST_CLIENT_ID_CHINA'), true, 'CHINA');
+        $product    = new Product(getenv('TEST_CLIENT_ID_CHINA'), true);
+        $product->setChinaProjectRegion();
         $games      = $product->getGames($this->_getTestingLocales());
         $this->assertArrayHasKey('MAHJONG', $games);
         foreach ($games as $gameKey => $game){
@@ -216,35 +226,40 @@ class ProductsTest extends TestCase {
 
     public function testGetAssessmentsError()
     {
-        $product     = new Product('MAKE_CLIENT_ID', true, 'CHINA');
+        $product     = new Product('MAKE_CLIENT_ID', true);
+        $product->setChinaProjectRegion();
         $assessments = $product->getAssessments();
         $this->assertEmpty($assessments);
     }
 
     public function testGetAssessmentTaskssError()
     {
-        $product     = new Product('MAKE_CLIENT_ID', true, 'CHINA');
+        $product     = new Product('MAKE_CLIENT_ID', true);
+        $product->setChinaProjectRegion();
         $assessments = $product->getAssessmentTasks();
         $this->assertEmpty($assessments);
     }
 
     public function testGetQuestionnairesError()
     {
-        $product        = new Product('MAKE_CLIENT_ID', true, 'CHINA');
+        $product        = new Product('MAKE_CLIENT_ID', true);
+        $product->setChinaProjectRegion();
         $questionnaires = $product->getQuestionnaires();
         $this->assertEmpty($questionnaires);
     }
 
     public function testGetTrainingError()
     {
-        $product   = new Product('MAKE_CLIENT_ID', true, 'CHINA');
+        $product   = new Product('MAKE_CLIENT_ID', true);
+        $product->setChinaProjectRegion();
         $trainings = $product->getTraining();
         $this->assertEmpty($trainings);
     }
 
     public function testGetGamesError()
     {
-        $product    = new Product('MAKE_CLIENT_ID', true, 'CHINA');
+        $product    = new Product('MAKE_CLIENT_ID', true);
+        $product->setChinaProjectRegion();
         $games      = $product->getGames();
         $this->assertEmpty($games);
     }

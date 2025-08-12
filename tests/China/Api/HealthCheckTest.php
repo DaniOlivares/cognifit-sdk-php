@@ -11,14 +11,16 @@ class HealthCheckTest extends TestCase {
 
     public function testRegistrationError()
     {
-        $healthCheckInstance = new HealthCheck('FAKE_CLIENT_ID', 'FAKE_SECRET_ID', false, 'CHINA');
+        $healthCheckInstance = new HealthCheck('FAKE_CLIENT_ID', 'FAKE_SECRET_ID', false);
+        $healthCheckInstance->setChinaProjectRegion();
         $response            = $healthCheckInstance->getInfo();
         $this->assertEquals(true, $response->hasError());
     }
 
     public function testRegistrationSuccess()
     {
-        $healthCheckInstance = new HealthCheck(getenv('TEST_CLIENT_ID_CHINA'), getenv('TEST_CLIENT_SECRET_CHINA'), true, 'CHINA');
+        $healthCheckInstance = new HealthCheck(getenv('TEST_CLIENT_ID_CHINA'), getenv('TEST_CLIENT_SECRET_CHINA'), true);
+        $healthCheckInstance->setChinaProjectRegion();
         $response            = $healthCheckInstance->getInfo();
         $this->assertEquals(false, $response->hasError());
         $this->assertIsArray($response->getData());

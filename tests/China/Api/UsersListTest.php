@@ -12,7 +12,8 @@ class UsersListTest extends TestCase
 
     public function testUserList(){
 
-        $usersListInstance  = new UsersList(getenv('TEST_CLIENT_ID_CHINA'), getenv('TEST_CLIENT_SECRET_CHINA'), true, 'CHINA');
+        $usersListInstance  = new UsersList(getenv('TEST_CLIENT_ID_CHINA'), getenv('TEST_CLIENT_SECRET_CHINA'), true);
+        $usersListInstance->setChinaProjectRegion();
         $response           = $usersListInstance->get();
         $this->assertEquals(false, $response->hasError());
         $this->assertIsArray($response->getData());
