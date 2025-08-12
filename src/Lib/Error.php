@@ -4,8 +4,11 @@ namespace CognifitSdk\Lib;
 
 class Error extends \Exception {
 
-	
-	public function __construct($message = null, $httpStatus = null, $httpBody = null, $jsonBody = null){
+    private $httpStatus;
+    private $httpBody;
+    private $jsonBody;
+
+    public function __construct($message = null, $httpStatus = null, $httpBody = null, $jsonBody = null){
 		parent::__construct($message);
 		$this->httpStatus 	= $httpStatus;
 		$this->httpBody 	= $httpBody;
