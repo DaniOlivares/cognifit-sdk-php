@@ -1,17 +1,17 @@
 <?php
-namespace Api;
+namespace China\Api;
 
 use PHPUnit\Framework\TestCase;
 
 use CognifitSdk\Api\Skills;
 
-include_once dirname(__FILE__) . '/../.environment-test.php';
+include_once dirname(__FILE__) . '/../../.environment-test.php';
 
 class SkillsTest extends TestCase {
 
     public function testGetSkills()
     {
-        $skills     = new Skills(getenv('TEST_CLIENT_ID'), true);
+        $skills     = new Skills(getenv('TEST_CLIENT_ID'), true, 'CHINA');
         $skillList  = $skills->getSkills();
         $this->assertIsArray($skillList);
         foreach ($skillList as $skill){
@@ -28,7 +28,7 @@ class SkillsTest extends TestCase {
 
     public function testGetSkillsWithLocales()
     {
-        $skills     = new Skills(getenv('TEST_CLIENT_ID'), true);
+        $skills     = new Skills(getenv('TEST_CLIENT_ID_CHINA'), true, 'CHINA');
         $skillList  = $skills->getSkills($this->_getTestingLocales());
         $this->assertIsArray($skillList);
         foreach ($skillList as $skill){
@@ -45,7 +45,7 @@ class SkillsTest extends TestCase {
 
     public function testGetSkillsError()
     {
-        $skills     = new Skills(getenv('MAKE_CLIENT_ID'), true);
+        $skills     = new Skills(getenv('FAKE_CLIENT_ID'), true, 'CHINA');
         $skillList  = $skills->getSkills($this->_getTestingLocales());
         $this->assertEmpty($skillList);
     }

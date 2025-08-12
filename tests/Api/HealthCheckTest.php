@@ -24,5 +24,18 @@ class HealthCheckTest extends TestCase {
         $this->assertIsArray($response->getData());
         $this->assertArrayHasKey('client_id', $response->getData());
     }
+
+    public function testRegistrationSuccessChina()
+    {
+        $healthCheckInstance = new HealthCheck(getenv('TEST_CLIENT_ID_CHINA'), getenv('TEST_CLIENT_SECRET_CHINA'), true);
+        $response            = $healthCheckInstance->getInfo();
+        $this->assertEquals(true, $response->hasError());
+
+        $healthCheckInstance = new HealthCheck(getenv('TEST_CLIENT_ID_CHINA'), getenv('TEST_CLIENT_SECRET_CHINA'), true, 'CHINA');
+        $response            = $healthCheckInstance->getInfo();
+        $this->assertEquals(false, $response->hasError());
+        $this->assertIsArray($response->getData());
+        $this->assertArrayHasKey('client_id', $response->getData());
+    }
 	
 }

@@ -1,18 +1,18 @@
 <?php
-namespace Api;
+namespace China\Api;
 
 use PHPUnit\Framework\TestCase;
 
 use CognifitSdk\Api\UserActivity;
 
-include_once dirname(__FILE__) . '/../.environment-test.php';
+include_once dirname(__FILE__) . '/../../.environment-test.php';
 
 class UserActivityTest extends TestCase {
 
     public function testGetHistoricalScoreAndSkills()
     {
-        $healthCheckInstance    = new UserActivity(getenv('TEST_CLIENT_ID'), getenv('TEST_CLIENT_SECRET'), true);
-        $response               = $healthCheckInstance->getHistoricalScoreAndSkills(getenv('TEST_USER_ID'));
+        $healthCheckInstance    = new UserActivity(getenv('TEST_CLIENT_ID_CHINA'), getenv('TEST_CLIENT_SECRET_CHINA'), true, 'CHINA');
+        $response               = $healthCheckInstance->getHistoricalScoreAndSkills(getenv('TEST_USER_ID_CHINA'));
         $this->assertEquals(false, $response->hasError());
         $this->assertIsArray($response->getData());
         $this->assertArrayHasKey('success', $response->getData());
@@ -23,8 +23,8 @@ class UserActivityTest extends TestCase {
 
     public function testGetPlayedGames()
     {
-        $healthCheckInstance    = new UserActivity(getenv('TEST_CLIENT_ID'), getenv('TEST_CLIENT_SECRET'), true);
-        $response               = $healthCheckInstance->getPlayedGames(getenv('TEST_USER_ID'));
+        $healthCheckInstance    = new UserActivity(getenv('TEST_CLIENT_ID_CHINA'), getenv('TEST_CLIENT_SECRET_CHINA'), true, 'CHINA');
+        $response               = $healthCheckInstance->getPlayedGames(getenv('TEST_USER_ID_CHINA'));
         $this->assertEquals(false, $response->hasError());
         $this->assertIsArray($response->getData());
         $this->assertArrayHasKey('success', $response->getData());
@@ -45,14 +45,14 @@ class UserActivityTest extends TestCase {
 
     public function testGetHistoricalScoreAndSkillsFail()
     {
-        $healthCheckInstance = new UserActivity('FAKE_CLIENT_ID', 'FAKE_SECRET_ID');
+        $healthCheckInstance = new UserActivity('FAKE_CLIENT_ID', 'FAKE_SECRET_ID', false, 'CHINA');
         $response            = $healthCheckInstance->getHistoricalScoreAndSkills('FAKE_USER_ID');
         $this->assertEquals(true, $response->hasError());
     }
 
     public function testGetPlayedGamesFail()
     {
-        $healthCheckInstance = new UserActivity('FAKE_CLIENT_ID', 'FAKE_SECRET_ID');
+        $healthCheckInstance = new UserActivity('FAKE_CLIENT_ID', 'FAKE_SECRET_ID', false, 'CHINA');
         $response = $healthCheckInstance->getPlayedGames('FAKE_USER_ID');
         $this->assertEquals(true, $response->hasError());
     }

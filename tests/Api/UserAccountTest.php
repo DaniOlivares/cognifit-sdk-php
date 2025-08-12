@@ -22,7 +22,7 @@ final class UserAccountTest extends TestCase{
             "user_name" => "Testing Api User",
             "user_lastname" => "First Of His Name",
             "user_email" => "olivaresroza+testingapiuser001@gmail.com",
-            "user_password" => "123456",
+            "user_password" => "1234567*aA",
             "user_birthday" => "1981-07-15",
             "user_sex" => 1,
             "user_locale" => "en"
@@ -43,7 +43,7 @@ final class UserAccountTest extends TestCase{
             "user_name" => "Testing Api User",
             "user_lastname" => "First Of His Name",
             "user_email" => $email,
-            "user_password" => "123456",
+            "user_password" => "1234567*aA",
             "user_birthday" => "1981-07-15",
             "user_sex" => 1,
             "user_locale" => "en"

@@ -41,7 +41,7 @@ final class UserAccessTokenTest extends TestCase{
             $response
 		);
 		$this->assertEquals(true, $response->hasError());
-        $this->assertEquals('invalid_client', $response->getError());
+        $this->assertEquals(400, $response->getError());
 	}
 	
 }

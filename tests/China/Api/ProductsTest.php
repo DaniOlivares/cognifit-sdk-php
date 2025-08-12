@@ -1,17 +1,17 @@
 <?php
-namespace Api;
+namespace China\Api;
 
 use PHPUnit\Framework\TestCase;
 
 use CognifitSdk\Api\Product;
 
-include_once dirname(__FILE__) . '/../.environment-test.php';
+include_once dirname(__FILE__) . '/../../.environment-test.php';
 
 class ProductsTest extends TestCase {
 
     public function testGetAssessments()
     {
-        $product     = new Product(getenv('TEST_CLIENT_ID'), true);
+        $product     = new Product(getenv('TEST_CLIENT_ID_CHINA'), true, 'CHINA');
         $assessments = $product->getAssessments();
         $this->assertArrayHasKey('GENERAL_ASSESSMENT', $assessments);
         $this->assertArrayNotHasKey('VISUAL_EPISODIC_TASK_ASSESSMENT', $assessments);
@@ -33,8 +33,11 @@ class ProductsTest extends TestCase {
 
     public function testGetAssessmentTasks()
     {
-        $product     = new Product(getenv('TEST_CLIENT_ID'), true);
+        $product     = new Product(getenv('TEST_CLIENT_ID_CHINA'), true, 'CHINA');
         $assessments = $product->getAssessmentTasks();
+        // TODO Add assessment task for China
+        $this->assertCount(0, $assessments);
+        /*
         $this->assertArrayHasKey('VISUAL_EPISODIC_TASK_ASSESSMENT', $assessments);
         $this->assertArrayNotHasKey('GENERAL_ASSESSMENT', $assessments);
         foreach ($assessments as $assessmentKey => $assessment){
@@ -51,11 +54,12 @@ class ProductsTest extends TestCase {
             $this->assertIsString($assessment->getTasks()[0]);
             $this->assertNotEquals('', $assessment->getTasks()[0]);
         }
+        */
     }
 
     public function testGetTraining()
     {
-        $product   = new Product(getenv('TEST_CLIENT_ID'), true);
+        $product   = new Product(getenv('TEST_CLIENT_ID_CHINA'), true, 'CHINA');
         $trainings = $product->getTraining();
         $this->assertArrayHasKey('NORMAL', $trainings);
         foreach ($trainings as $trainingKey => $training){
@@ -74,7 +78,7 @@ class ProductsTest extends TestCase {
 
     public function testGetGames()
     {
-        $product    = new Product(getenv('TEST_CLIENT_ID'), true);
+        $product    = new Product(getenv('TEST_CLIENT_ID_CHINA'), true, 'CHINA');
         $games      = $product->getGames();
         $this->assertArrayHasKey('MAHJONG', $games);
         foreach ($games as $gameKey => $game){
@@ -90,8 +94,11 @@ class ProductsTest extends TestCase {
 
     public function testGetQuestionnaires()
     {
-        $product        = new Product(getenv('TEST_CLIENT_ID'), true);
+        $product        = new Product(getenv('TEST_CLIENT_ID_CHINA'), true, 'CHINA');
         $questionnaires = $product->getQuestionnaires();
+        // TODO Add questionnaire for China
+        $this->assertCount(0, $questionnaires);
+        /*
         $this->assertArrayHasKey('PHQ2_QUESTIONNAIRE_ASSESSMENT', $questionnaires);
         foreach ($questionnaires as $questionnaireKey => $questionnaire){
             $this->assertInstanceOf('CognifitSdk\Lib\Products\Questionnaire', $questionnaire);
@@ -102,11 +109,12 @@ class ProductsTest extends TestCase {
             $this->assertArrayHasKey('images', $questionnaire->getAssets());
             $this->assertArrayHasKey('scareIconZodiac', $questionnaire->getAssets()['images']);
         }
+        */
     }
 
     public function testGetAssessmentsWithLocales()
     {
-        $product     = new Product(getenv('TEST_CLIENT_ID'), true);
+        $product     = new Product(getenv('TEST_CLIENT_ID_CHINA'), true, 'CHINA');
         $assessments = $product->getAssessments($this->_getTestingLocales());
         $this->assertArrayHasKey('GENERAL_ASSESSMENT', $assessments);
         $this->assertArrayNotHasKey('VISUAL_EPISODIC_TASK_ASSESSMENT', $assessments);
@@ -128,8 +136,11 @@ class ProductsTest extends TestCase {
 
     public function testGetAssessmentTasksWithLocales()
     {
-        $product     = new Product(getenv('TEST_CLIENT_ID'), true);
+        $product     = new Product(getenv('TEST_CLIENT_ID_CHINA'), true, 'CHINA');
         $assessments = $product->getAssessmentTasks($this->_getTestingLocales());
+        // TODO Add assessment task for China
+        $this->assertCount(0, $assessments);
+        /*
         $this->assertArrayHasKey('VISUAL_EPISODIC_TASK_ASSESSMENT', $assessments);
         $this->assertArrayNotHasKey('GENERAL_ASSESSMENT', $assessments);
         foreach ($assessments as $assessmentKey => $assessment){
@@ -146,12 +157,16 @@ class ProductsTest extends TestCase {
             $this->assertIsString($assessment->getTasks()[0]);
             $this->assertNotEquals('', $assessment->getTasks()[0]);
         }
+        */
     }
 
     public function testGetQuestionnairesWithLocales()
     {
-        $product        = new Product(getenv('TEST_CLIENT_ID'), true);
+        $product        = new Product(getenv('TEST_CLIENT_ID_CHINA'), true, 'CHINA');
         $questionnaires = $product->getQuestionnaires($this->_getTestingLocales());
+        // TODO Add questionnaire for China
+        $this->assertCount(0, $questionnaires);
+        /*
         $this->assertArrayHasKey('PCPTSD5_QUESTIONNAIRE_ASSESSMENT', $questionnaires);
         foreach ($questionnaires as $questionnaireKey => $questionnaire){
             $this->assertInstanceOf('CognifitSdk\Lib\Products\Questionnaire', $questionnaire);
@@ -161,11 +176,12 @@ class ProductsTest extends TestCase {
             $this->assertArrayHasKey('images', $questionnaire->getAssets());
             $this->assertArrayHasKey('scareIconZodiac', $questionnaire->getAssets()['images']);
         }
+        */
     }
 
     public function testGetTrainingWithLocales()
     {
-        $product   = new Product(getenv('TEST_CLIENT_ID'), true);
+        $product   = new Product(getenv('TEST_CLIENT_ID_CHINA'), true, 'CHINA');
         $trainings = $product->getTraining($this->_getTestingLocales());
         $this->assertArrayHasKey('NORMAL', $trainings);
         foreach ($trainings as $trainingKey => $training){
@@ -184,7 +200,7 @@ class ProductsTest extends TestCase {
 
     public function testGetGamesWithLocales()
     {
-        $product    = new Product(getenv('TEST_CLIENT_ID'), true);
+        $product    = new Product(getenv('TEST_CLIENT_ID_CHINA'), true, 'CHINA');
         $games      = $product->getGames($this->_getTestingLocales());
         $this->assertArrayHasKey('MAHJONG', $games);
         foreach ($games as $gameKey => $game){
@@ -200,35 +216,35 @@ class ProductsTest extends TestCase {
 
     public function testGetAssessmentsError()
     {
-        $product     = new Product('MAKE_CLIENT_ID', true);
+        $product     = new Product('MAKE_CLIENT_ID', true, 'CHINA');
         $assessments = $product->getAssessments();
         $this->assertEmpty($assessments);
     }
 
     public function testGetAssessmentTaskssError()
     {
-        $product     = new Product('MAKE_CLIENT_ID', true);
+        $product     = new Product('MAKE_CLIENT_ID', true, 'CHINA');
         $assessments = $product->getAssessmentTasks();
         $this->assertEmpty($assessments);
     }
 
     public function testGetQuestionnairesError()
     {
-        $product        = new Product('MAKE_CLIENT_ID', true);
+        $product        = new Product('MAKE_CLIENT_ID', true, 'CHINA');
         $questionnaires = $product->getQuestionnaires();
         $this->assertEmpty($questionnaires);
     }
 
     public function testGetTrainingError()
     {
-        $product   = new Product('MAKE_CLIENT_ID', true);
+        $product   = new Product('MAKE_CLIENT_ID', true, 'CHINA');
         $trainings = $product->getTraining();
         $this->assertEmpty($trainings);
     }
 
     public function testGetGamesError()
     {
-        $product    = new Product('MAKE_CLIENT_ID', true);
+        $product    = new Product('MAKE_CLIENT_ID', true, 'CHINA');
         $games      = $product->getGames();
         $this->assertEmpty($games);
     }

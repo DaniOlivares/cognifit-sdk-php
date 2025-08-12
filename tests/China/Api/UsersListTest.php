@@ -1,18 +1,18 @@
 <?php
-namespace Api;
+namespace China\Api;
 
 use CognifitSdk\Api\UsersList;
 use CognifitSdk\Lib\UserData;
 use PHPUnit\Framework\TestCase;
 
-include_once dirname(__FILE__) . '/../.environment-test.php';
+include_once dirname(__FILE__) . '/../../.environment-test.php';
 
 class UsersListTest extends TestCase
 {
 
     public function testUserList(){
 
-        $usersListInstance  = new UsersList(getenv('TEST_CLIENT_ID'), getenv('TEST_CLIENT_SECRET'), true);
+        $usersListInstance  = new UsersList(getenv('TEST_CLIENT_ID_CHINA'), getenv('TEST_CLIENT_SECRET_CHINA'), true, 'CHINA');
         $response           = $usersListInstance->get();
         $this->assertEquals(false, $response->hasError());
         $this->assertIsArray($response->getData());
