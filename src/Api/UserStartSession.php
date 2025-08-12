@@ -8,8 +8,8 @@ class UserStartSession extends Request {
 
     private $clientHash = '';
 
-    public function __construct(string $clientId, string $clientSecret, $sandbox = false, $clientHash = ''){
-        parent::__construct($clientId, $clientSecret, $sandbox);
+    public function __construct(string $clientId, string $clientSecret, $sandbox = false, $clientHash = '', $projectRegion = 'US'){
+        parent::__construct($clientId, $clientSecret, $sandbox, $projectRegion);
         $this->clientHash = $clientHash;
     }
 

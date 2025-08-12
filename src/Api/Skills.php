@@ -9,8 +9,8 @@ class Skills extends Request {
 
     const RESOURCE_PATH  = '/skills';
 
-    public function __construct(string $clientId, $sandbox = false){
-        parent::__construct($clientId, '', $sandbox);
+    public function __construct(string $clientId, $sandbox = false, $projectRegion = 'US'){
+        parent::__construct($clientId, '', $sandbox, $projectRegion);
     }
 
     public function getSkills($locales = array()){

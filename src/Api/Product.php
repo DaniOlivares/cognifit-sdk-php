@@ -16,8 +16,8 @@ class Product extends Request {
     const RESOURCE_PATH_TRAINING            = '/programs/trainings';
     const RESOURCE_PATH_GAME                = '/programs/tasks';
 
-    public function __construct(string $clientId, $sandbox = false){
-        parent::__construct($clientId, '', $sandbox);
+    public function __construct(string $clientId, $sandbox = false, $projectRegion = 'US'){
+        parent::__construct($clientId, '', $sandbox, $projectRegion);
     }
 
     public function getAssessments($locales = array()){

@@ -7,11 +7,13 @@ class Request {
 	protected   string $clientId;
     private     string $clientSecret;
 	private     string $sandbox;
+    private     string $projectRegion;
 
-	public function __construct(string $clientId, string $clientSecret, $sandbox = false){
+	public function __construct(string $clientId, string $clientSecret, $sandbox = false, string $projectRegion = 'US'){
 		$this->clientId 	= $clientId;
 		$this->clientSecret = $clientSecret;
 		$this->sandbox 		= $sandbox;
+        $this->projectRegion = $projectRegion;
 	}
 	
 	protected function doRequest($resourcePath, $bodyParams, $method = 'POST'){
@@ -69,21 +71,28 @@ class Request {
 	}
 
     protected function getDomain(){
-        if($this->sandbox){
-            $domain		= 'https://preapi.cognifit.com';
-        }else{
-            $domain = 'https://api.cognifit.com';
+        if($this->projectRegion === 'CHINA'){
+            return 'https://api.braintraining.cn';
         }
-        return $domain;
+
+        if($this->sandbox){
+            return 'https://preapi.cognifit.com';
+        }
+
+        return 'https://api.cognifit.com';
     }
 
     protected function getDomainFrontend(){
-        if($this->sandbox){
-            $domain		= 'https://preprod.cognifit.com';
-        }else{
-            $domain = 'https://www.cognifit.com';
+
+        if($this->projectRegion === 'CHINA'){
+            return 'https://www.braintraining.cn';
         }
-        return $domain;
+
+        if($this->sandbox){
+            return 'https://preprod.cognifit.com';
+        }
+
+        return 'https://www.cognifit.com';
     }
 
     protected function urlEncodeLocales($locales){
